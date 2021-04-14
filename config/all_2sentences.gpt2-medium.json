@@ -1,0 +1,5 @@
+{
+  "input": "./stimuli/all_2sentences.csv",
+  "output": "./results/all_2sentences.gpt2-medium.csv",
+  "model": "gpt2-medium"
+}

@@ -1,6 +1,7 @@
 import random
 import csv
 import sys
+import argparse
 
 
 ANIMALS = [
@@ -38,7 +39,7 @@ ANIMAL_CONTINUATIONS = [
   "had a colorful back",
   "enjoyed frolicking in the forest",
   "preferred fish over other food",
-  "POSS name was Fido",
+  "was called Fido",
   "liked to swim in lakes",
   "loved cheese"
 ]
@@ -66,8 +67,8 @@ DRINK_VERBS = [
   ["had", "didn't have", "have"],
   ["slurped", "didn't slurp", "slurp"],
   ["downed", "didn't down", "down"],
-  ["poured", "didn't pour"],
-  ["ordered", "didn't order"]
+  ["poured", "didn't pour", "pour"],
+  ["ordered", "didn't order", "order"]
 ]
 
 DRINK_CONTINUATIONS = [
@@ -99,16 +100,16 @@ VEHICLES = [
 
 
 VEHICLE_VERBS = [
-  ["bought", "didn't buy"],
-  ["rented", "didn't rent"],
-  ["fixed", "didn't fix"],
-  ["leased", "didn't lease"],
-  ["acquired", "didn't acquire"],
-  ["destroyed", "didn't destroy"],
-  ["stole", "didn't steal"],
-  ["donated", "didn't donate"],
-  ["repaired", "didn't repair"],
-  ["ruined", "didn't ruin"]
+  ["bought", "didn't buy", "buy"],
+  ["rented", "didn't rent", "rent"],
+  ["fixed", "didn't fix", "fix"],
+  ["leased", "didn't lease", "lease"],
+  ["acquired", "didn't acquire", "aquire"],
+  ["destroyed", "didn't destroy", "destroy"],
+  ["stole", "didn't steal", "steal"],
+  ["donated", "didn't donate", "donate"],
+  ["repaired", "didn't repair", "repair"],
+  ["ruined", "didn't ruin", "ruin"]
 ]
 
 
@@ -121,7 +122,7 @@ VEHICLE_CONTINUATIONS = [
   "had a flat tire",
   "could seat multiple people",
   "required a special cable",
-  "POSS rear mirror was dirty",
+  "emitted lots of greenhouse gases",
   "made squeaky noises"
 ]
 
@@ -139,16 +140,16 @@ CLOTHES = [
 ]
 
 CLOTHES_VERBS = [
-  ["wore", "didn't wear"],
-  ["bought", "didn't buy"],
-  ["made", "didn't make"],
-  ["donated", "didn't donate"],
-  ["found", "didn't find"],
-  ["ordered", "didn't order"],
-  ["tried", "didn't try"],
-  ["altered", "didn't alter"],
-  ["lost", "didn't lose"],
-  ["borrowed", "didn't borrow"]
+  ["wore", "didn't wear", "wear"],
+  ["bought", "didn't buy", "buy"],
+  ["made", "didn't make", "make"],
+  ["donated", "didn't donate", "donate"],
+  ["found", "didn't find", "find"],
+  ["ordered", "didn't order", "order"],
+  ["tried", "didn't try", "try"],
+  ["altered", "didn't alter", "alter"],
+  ["lost", "didn't lose", "lose"],
+  ["borrowed", "didn't borrow", "borrow"]
 ]
 
 CLOTHES_CONTINUATIONS = [
@@ -178,16 +179,16 @@ FURNITURE = [
 ]
 
 FURNITURE_VERBS = [
-  ["assembled", "didn't assemble"],
-  ["bought", "didn't buy"],
-  ["built", "didn't build"],
-  ["refurbished", "didn't refurbish"],
-  ["sold", "didn't sell"],
-  ["painted", "didn't paint"],
-  ["sanded", "didn't sand"],
-  ["stained", "didn't stain"],
-  ["scratched", "didn't scratch"],
-  ["burned", "didn't burn"]
+  ["assembled", "didn't assemble", "assemble"],
+  ["bought", "didn't buy", "buy"],
+  ["built", "didn't build", "build"],
+  ["refurbished", "didn't refurbish", "refurbish"],
+  ["sold", "didn't sell", "sell"],
+  ["painted", "didn't paint", "paint"],
+  ["sanded", "didn't sand", "sand"],
+  ["stained", "didn't stain", "stain"],
+  ["scratched", "didn't scratch", "scratch"],
+  ["burned", "didn't burn", "burn"]
 ]
 
 FURNITURE_CONTINUATIONS = [
@@ -222,14 +223,9 @@ ALL_STIMS = {
     "continuations": VEHICLE_CONTINUATIONS
   },
   "CLOTHES" : {
-    "nouns": VEHICLES,
-    "verbs": VEHICLE_VERBS,
-    "continuations": VEHICLE_CONTINUATIONS
-  }, 
-  "VEHICLES" : {
-    "nouns": VEHICLES,
-    "verbs": VEHICLE_VERBS,
-    "continuations": VEHICLE_CONTINUATIONS
+    "nouns": CLOTHES,
+    "verbs": CLOTHES_VERBS,
+    "continuations": CLOTHES_CONTINUATIONS
   }, 
   "FURNITURE" : {
     "nouns": FURNITURE,
@@ -242,68 +238,74 @@ ALL_STIMS = {
 PERSON_NAMES = ["James", "John", "Bob", "Michael", "Bill", "David", "Richard", "Joseph", "Thomas", "Chris", "Mary", "Jennifer", "Linda", "Elizabeth", "Barbara", "Susan", "Jessica", "Sarah", "Karen", "Nancy"]
 
 
-sentences = []
+def main():
+  
+  argparser = argparse.ArgumentParser()
+  argparser.add_argument("--join_det", type=str, default=" and the")
+  argparser.add_argument("--join_pron", type=str, default=" and it")
+  
+  args = argparser.parse_args()
 
-#NEGATION
+  JOINING_MATERIAL_DET = args.join_det
+  JOINING_MATERIAL_PRON = args.join_pron
+  
+  sentences = []
+  
+  #NEGATION
+  
+  pair_id = 0
+  for key in ALL_STIMS:
+    for noun in ALL_STIMS[key]["nouns"]:
+      for verb in ALL_STIMS[key]["verbs"]:
+        for continuation in ALL_STIMS[key]["continuations"]:
+          person = random.choice(PERSON_NAMES)
+          pos_sent = person + " " + verb[0] + " " + noun[0] + " ||| " + JOINING_MATERIAL_DET + " " + noun[1] + "  ||| " + continuation + "."
+          neg_sent = person + " " + verb[1] + " " + noun[0] + " ||| " + JOINING_MATERIAL_DET + " " + noun[1] + "  ||| " +  continuation + "."
+          sentences.append({"pair_id": pair_id, "sentence": pos_sent, "type": "negation", "pronoun": 0, "preferred": 1, "noun": noun[1], "verb": verb[2]})
+          sentences.append({"pair_id": pair_id, "sentence": neg_sent, "type": "negation", "pronoun": 0, "preferred": 0, "noun": noun[1], "verb": verb[2]})
+          
+          pair_id += 1
+          # with pronouns
+          pos_sent = person + " " + verb[0] + " " + noun[0] + " ||| " + JOINING_MATERIAL_PRON + "  ||| " + continuation + "."
+          neg_sent = person + " " + verb[1] + " " + noun[0] + " ||| " + JOINING_MATERIAL_PRON + "  ||| " + continuation + "."
+          sentences.append({"pair_id": pair_id, "sentence": pos_sent, "type": "negation", "pronoun": 1, "preferred": 1, "noun": noun[1], "verb": verb[2]})
+          sentences.append({"pair_id": pair_id, "sentence": neg_sent, "type": "negation", "pronoun": 1, "preferred": 0, "noun": noun[1], "verb": verb[2]})
+          pair_id += 1
+  
+  # FACTIVES
+  
+  for key in ALL_STIMS:
+    for noun in ALL_STIMS[key]["nouns"]:
+      for verb in ALL_STIMS[key]["verbs"]:
+        for continuation in ALL_STIMS[key]["continuations"]:
+          person = random.choice(PERSON_NAMES)
+          pos_sent = "I know that " + person + " " + verb[0] + " " + noun[0] + " ||| " + JOINING_MATERIAL_DET + " " + noun[1] + "  ||| " + continuation + "."
+          neg_sent = "I doubt that " + person + " " + verb[0] + " " + noun[0] + " ||| " + JOINING_MATERIAL_DET + " " + noun[1] + "  ||| " +  continuation + "."
+          sentences.append({"pair_id": pair_id, "sentence": pos_sent, "type": "factive", "pronoun": 0, "preferred": 1, "noun": noun[1], "verb": verb[2]})
+          sentences.append({"pair_id": pair_id, "sentence": neg_sent, "type": "factive", "pronoun": 0, "preferred": 0, "noun": noun[1], "verb": verb[2]})
+          
+          pair_id += 1
+          # with pronouns
+          pos_sent = "I know that " + person + " " + verb[0] + " " + noun[0] + " ||| " + JOINING_MATERIAL_PRON + "  ||| " + continuation + "."
+          neg_sent = "I doubt that " + person + " " + verb[0] + " " + noun[0] +  " ||| " + JOINING_MATERIAL_PRON + "  ||| " + continuation + "."
+          sentences.append({"pair_id": pair_id, "sentence": pos_sent, "type": "factive", "pronoun": 1, "preferred": 1, "noun": noun[1], "verb": verb[2]})
+          sentences.append({"pair_id": pair_id, "sentence": neg_sent, "type": "factive", "pronoun": 1, "preferred": 0, "noun": noun[1], "verb": verb[2]})
+          pair_id += 1
+          
+  
+  
+  
+  
+  
+  
+  writer = csv.DictWriter(sys.stdout, fieldnames=sentences[0].keys())
+  writer.writeheader()
+  writer.writerows(sentences)
 
-pair_id = 0
-for key in ALL_STIMS:
-  for noun in ALL_STIMS[key]["nouns"]:
-    for verb in ALL_STIMS[key]["verbs"]:
-      for continuation in ALL_STIMS[key]["continuations"]:
-        person = random.choice(PERSON_NAMES)
-        pos_sent = person + " " + verb[0] + " " + noun[0] + " and the " + noun[1] + " " + continuation + "."
-        neg_sent = person + " " + verb[1] + " " + noun[0] + " and the " + noun[1] + " " +  continuation + "."
-        sentences.append({"pair_id": pair_id, "sentence": pos_sent, "type": "negation", "pronoun": 0, "preferred": 1, "noun": noun[1]})
-        sentences.append({"pair_id": pair_id, "sentence": neg_sent, "type": "negation", "pronoun": 0, "preferred": 0, "noun": noun[1]})
         
-        pair_id += 1
-        # with pronouns
-        pos_sent = person + " " + verb[0] + " " + noun[0] + " and it " + continuation + "."
-        neg_sent = person + " " + verb[1] + " " + noun[0] + " and it " + continuation + "."
-        sentences.append({"pair_id": pair_id, "sentence": pos_sent, "type": "negation", "pronoun": 1, "preferred": 1, "noun": noun[1]})
-        sentences.append({"pair_id": pair_id, "sentence": neg_sent, "type": "negation", "pronoun": 1, "preferred": 0, "noun": noun[1]})
-        pair_id += 1
-
-# FACTIVES
-
-for key in ALL_STIMS:
-  for noun in ALL_STIMS[key]["nouns"]:
-    for verb in ALL_STIMS[key]["verbs"]:
-      for continuation in ALL_STIMS[key]["continuations"]:
-        person = random.choice(PERSON_NAMES)
-        pos_sent = "I know that " + person + " " + verb[0] + " " + noun[0] + " and the " + noun[1] + " " + continuation + "."
-        neg_sent = "I doubt that " + person + " " + verb[0] + " " + noun[0] + " and the " + noun[1] + " " +  continuation + "."
-        sentences.append({"pair_id": pair_id, "sentence": pos_sent, "type": "factive", "pronoun": 0, "preferred": 1, "noun": noun[1]})
-        sentences.append({"pair_id": pair_id, "sentence": neg_sent, "type": "factive", "pronoun": 0, "preferred": 0, "noun": noun[1]})
         
-        pair_id += 1
-        # with pronouns
-        pos_sent = "I know that " + person + " " + verb[0] + " " + noun[0] + " and it " + continuation + "."
-        neg_sent = "I doubt that " + person + " " + verb[0] + " " + noun[0] + " and it " + continuation + "."
-        sentences.append({"pair_id": pair_id, "sentence": pos_sent, "type": "factive", "pronoun": 1, "preferred": 1, "noun": noun[1]})
-        sentences.append({"pair_id": pair_id, "sentence": neg_sent, "type": "factive", "pronoun": 1, "preferred": 0, "noun": noun[1]})
-        pair_id += 1
-        
-
-
-
-# fix possessives
-for sent in sentences:
-  sent["sentence"] = sent["sentence"].replace("it POSS ", "its ")
-  sent["sentence"] = sent["sentence"].replace(" POSS ", "'s ")
-
-
-
-
-
-writer = csv.DictWriter(sys.stdout, fieldnames=sentences[0].keys())
-writer.writeheader()
-writer.writerows(sentences)
-
-        
-        
-        
+if __name__ == '__main__':
+  main()   
         
         
       
