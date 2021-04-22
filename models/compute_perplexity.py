@@ -54,7 +54,6 @@ for example in tqdm.tqdm(examples):
     target_ids = input_ids.clone()
     target_ids[:,:-trg_len] = -100
     
-    # TODO: compute accuracy on It / the NP
     
 
 
@@ -62,7 +61,7 @@ for example in tqdm.tqdm(examples):
         outputs = model(input_ids, labels=target_ids)
         log_likelihood = outputs.loss * trg_len
         example["ll"] = log_likelihood.numpy()
-        target_ids[:,-trg_len:-trg_len+np_len] = -100
+        target_ids[:,-trg_len+np_len:] = -100
         outputs = model(input_ids, labels=target_ids)
         log_likelihood = outputs.loss * np_len
         example["np_ll"] = log_likelihood.numpy()

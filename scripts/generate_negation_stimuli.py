@@ -241,8 +241,8 @@ PERSON_NAMES = ["James", "John", "Bob", "Michael", "Bill", "David", "Richard", "
 def main():
   
   argparser = argparse.ArgumentParser()
-  argparser.add_argument("--join_det", type=str, default=" and the")
-  argparser.add_argument("--join_pron", type=str, default=" and it")
+  argparser.add_argument("--join_det", type=str, default=" and  ||| the")
+  argparser.add_argument("--join_pron", type=str, default=" and  ||| it")
   
   args = argparser.parse_args()
 
@@ -259,15 +259,15 @@ def main():
       for verb in ALL_STIMS[key]["verbs"]:
         for continuation in ALL_STIMS[key]["continuations"]:
           person = random.choice(PERSON_NAMES)
-          pos_sent = person + " " + verb[0] + " " + noun[0] + " ||| " + JOINING_MATERIAL_DET + " " + noun[1] + "  ||| " + continuation + "."
-          neg_sent = person + " " + verb[1] + " " + noun[0] + " ||| " + JOINING_MATERIAL_DET + " " + noun[1] + "  ||| " +  continuation + "."
+          pos_sent = person + " " + verb[0] + " " + noun[0] + JOINING_MATERIAL_DET + " " + noun[1] + "  ||| " + continuation + "."
+          neg_sent = person + " " + verb[1] + " " + noun[0] + JOINING_MATERIAL_DET + " " + noun[1] + "  ||| " +  continuation + "."
           sentences.append({"pair_id": pair_id, "sentence": pos_sent, "type": "negation", "pronoun": 0, "preferred": 1, "noun": noun[1], "verb": verb[2]})
           sentences.append({"pair_id": pair_id, "sentence": neg_sent, "type": "negation", "pronoun": 0, "preferred": 0, "noun": noun[1], "verb": verb[2]})
           
           pair_id += 1
           # with pronouns
-          pos_sent = person + " " + verb[0] + " " + noun[0] + " ||| " + JOINING_MATERIAL_PRON + "  ||| " + continuation + "."
-          neg_sent = person + " " + verb[1] + " " + noun[0] + " ||| " + JOINING_MATERIAL_PRON + "  ||| " + continuation + "."
+          pos_sent = person + " " + verb[0] + " " + noun[0] + JOINING_MATERIAL_PRON + "  ||| " + continuation + "."
+          neg_sent = person + " " + verb[1] + " " + noun[0] + JOINING_MATERIAL_PRON + "  ||| " + continuation + "."
           sentences.append({"pair_id": pair_id, "sentence": pos_sent, "type": "negation", "pronoun": 1, "preferred": 1, "noun": noun[1], "verb": verb[2]})
           sentences.append({"pair_id": pair_id, "sentence": neg_sent, "type": "negation", "pronoun": 1, "preferred": 0, "noun": noun[1], "verb": verb[2]})
           pair_id += 1
@@ -279,15 +279,15 @@ def main():
       for verb in ALL_STIMS[key]["verbs"]:
         for continuation in ALL_STIMS[key]["continuations"]:
           person = random.choice(PERSON_NAMES)
-          pos_sent = "I know that " + person + " " + verb[0] + " " + noun[0] + " ||| " + JOINING_MATERIAL_DET + " " + noun[1] + "  ||| " + continuation + "."
-          neg_sent = "I doubt that " + person + " " + verb[0] + " " + noun[0] + " ||| " + JOINING_MATERIAL_DET + " " + noun[1] + "  ||| " +  continuation + "."
+          pos_sent = "I know that " + person + " " + verb[0] + " " + noun[0] + JOINING_MATERIAL_DET + " " + noun[1] + "  ||| " + continuation + "."
+          neg_sent = "I doubt that " + person + " " + verb[0] + " " + noun[0] + JOINING_MATERIAL_DET + " " + noun[1] + "  ||| " +  continuation + "."
           sentences.append({"pair_id": pair_id, "sentence": pos_sent, "type": "factive", "pronoun": 0, "preferred": 1, "noun": noun[1], "verb": verb[2]})
           sentences.append({"pair_id": pair_id, "sentence": neg_sent, "type": "factive", "pronoun": 0, "preferred": 0, "noun": noun[1], "verb": verb[2]})
           
           pair_id += 1
           # with pronouns
-          pos_sent = "I know that " + person + " " + verb[0] + " " + noun[0] + " ||| " + JOINING_MATERIAL_PRON + "  ||| " + continuation + "."
-          neg_sent = "I doubt that " + person + " " + verb[0] + " " + noun[0] +  " ||| " + JOINING_MATERIAL_PRON + "  ||| " + continuation + "."
+          pos_sent = "I know that " + person + " " + verb[0] + " " + noun[0] + JOINING_MATERIAL_PRON + "  ||| " + continuation + "."
+          neg_sent = "I doubt that " + person + " " + verb[0] + " " + noun[0] + JOINING_MATERIAL_PRON + "  ||| " + continuation + "."
           sentences.append({"pair_id": pair_id, "sentence": pos_sent, "type": "factive", "pronoun": 1, "preferred": 1, "noun": noun[1], "verb": verb[2]})
           sentences.append({"pair_id": pair_id, "sentence": neg_sent, "type": "factive", "pronoun": 1, "preferred": 0, "noun": noun[1], "verb": verb[2]})
           pair_id += 1
