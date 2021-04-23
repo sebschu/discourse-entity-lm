@@ -1,5 +1,6 @@
 {
   "input": "./stimuli/all_conjunction.csv",
   "output": "./results/all_conjunction.gpt2-large.csv",
-  "model": "gpt2-large"
+  "model": "gpt2-large",
+  "compute_ll": true
 }

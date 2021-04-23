@@ -1,0 +1,6 @@
+{
+  "input": "./stimuli/pronoun_2sentences.csv",
+  "output": "./results/pronoun_2sentences.gpt2.ranking.csv",
+  "model": "gpt2",
+  "compute_rank": true
+}

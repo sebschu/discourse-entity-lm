@@ -1,0 +1,6 @@
+{
+  "input": "./stimuli/pronoun_conjunction.csv",
+  "output": "./results/pronoun_conjunction.gpt2-large.ranking.csv",
+  "model": "gpt2-large",
+  "compute_rank": true
+}
