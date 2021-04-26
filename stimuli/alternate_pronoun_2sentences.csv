@@ -1,3 +1,4 @@
+pair_id,sentence,type,pronoun,preferred,noun,verb
 1,John owned a dog. ||| He ,negation,1,1,dog,own
 1,John didn't own a dog. ||| He ,negation,1,0,dog,own
 3,Jennifer owned a dog. ||| She ,negation,1,1,dog,own
