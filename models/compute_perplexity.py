@@ -65,11 +65,13 @@ for example in tqdm.tqdm(examples):
           outputs = model(input_ids, labels=target_ids)
           log_likelihood = outputs.loss * trg_len
           example["ll"] = log_likelihood.numpy()
-          
-          target_ids[:,-trg_len+np_len:] = -100
-          outputs = model(input_ids, labels=target_ids)
-          log_likelihood = outputs.loss * np_len
-          example["np_ll"] = log_likelihood.numpy()
+          if trg_len > np_len:
+            target_ids[:,-trg_len+np_len:] = -100
+            outputs = model(input_ids, labels=target_ids)
+            log_likelihood = outputs.loss * np_len
+            example["np_ll"] = log_likelihood.numpy()
+          else:
+            example["np_ll"] = example["ll"]
         if compute_rank:
           outputs = model(input_ids)
           logits = sm(outputs.logits[0, np_start_idx-1, :])
