@@ -1,0 +1,5 @@
+{
+  "input": "./stimuli/ettinger-negation.csv",
+  "output": "./results/ettinger-negation.gpt2.csv",
+  "model": "gpt2"
+}

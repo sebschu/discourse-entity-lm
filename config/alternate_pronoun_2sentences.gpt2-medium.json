@@ -1,0 +1,6 @@
+{
+  "input": "./stimuli/alternate_pronoun_2sentences.csv",
+  "output": "./results/alternate_pronoun_2sentences.gpt2-medium.csv",
+  "model": "gpt2-medium",
+  "compute_ll": true
+}
