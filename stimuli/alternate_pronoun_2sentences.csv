@@ -19999,4 +19999,3 @@ pair_id,sentence,type,pronoun,preferred,noun,verb
 19997,I doubt that Linda burned a cabinet. |||  She ,factive,1,0,cabinet,burn
 19999,I know that Chris burned a cabinet. |||  He ,factive,1,1,cabinet,burn
 19999,I doubt that Chris burned a cabinet. |||  He ,factive,1,0,cabinet,burn
->>>>>>> a942d9060307cc4c9969c8c857738cdb05c3c2cb
