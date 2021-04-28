@@ -1,0 +1,6 @@
+{
+  "input": "./stimuli/alternate_pronoun_conjunction.csv",
+  "output": "./results/alternate_pronoun_conjunction.gpt2-large.csv",
+  "model": "gpt2-large",
+  "compute_ll": true
+}
