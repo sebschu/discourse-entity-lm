@@ -1,5 +1,6 @@
 {
   "input": "./stimuli/ettinger-negation.csv",
   "output": "./results/ettinger-negation.gpt2-xl.csv",
-  "model": "gpt2-xl"
+  "model": "gpt2-xl",
+  "compute_ll": true
 }
