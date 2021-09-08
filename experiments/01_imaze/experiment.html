@@ -1,0 +1,217 @@
+<html>
+
+<head>
+    <title>Language Learning Experiment</title>
+
+    <!--JS-->
+
+    <!-- external general utilities -->
+    <script src="./_shared/js/jquery-1.11.1.min.js "></script>
+    <script src="./_shared/full-projects/jquery-ui/jquery-ui.min.js"></script>
+    <script src="./_shared/js/underscore-min.js"></script>
+    <!-- if you want to draw stuff: -->
+    <!-- <script src="./_shared/js/raphael-min.js"></script> -->
+
+    <!-- cocolab experiment logic -->
+    <script src="./_shared/js/exp-V2.js"></script>
+    <script src="./_shared/js/stream-V2.js"></script>
+
+    <!-- cocolab general utilities -->
+    <script src="https://proliferate.alps.science/static/js/proliferate.js" type="text/javascript"></script>
+    <script src="./_shared/js/browserCheck.js"></script>
+    <script src="./_shared/js/utils.js"></script>
+    <!-- if you want to draw cute creatures (depends on raphael): -->
+    <!-- <script src="./_shared/js/ecosystem.js"></script> -->
+
+    <!-- experiment specific helper functions -->
+    <!-- <script src="js/local-utils.js"></script> -->
+
+    <!--CSS-->
+    <link href="./_shared/full-projects/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+    <link href="./_shared/css/cocolab-style.css" rel="stylesheet" type="text/css"/>
+    <link href="css/local-style.css" rel="stylesheet" type="text/css"/>
+
+    <!-- experiment file -->
+    <script src="js/stims.js"></script>
+    <script type="text/javascript">
+      var CONDITION = 1;
+    </script>
+    <script src="js/template.js"></script>
+
+</head>
+
+<body onload="init();">
+  <noscript>This task requires JavaScript.</noscript>
+
+  <div class="slide" id="i0" >
+    <!-- <img src="./_shared/images/cocologo.png" alt="Stanford CoCoLab" id="cocologo"></img> -->
+    <p id="cocolab">New York University</p>
+    <p id="instruct-text">
+      In this experiment, you will read short texts (one or two sentences) word by word and you will have to select which word continues the text. The experiment should take about 6-7 minutes. Please pay attention. Thank you!</p>
+    <input id="start_button" type="button" class="button" value="Start Experiment">
+    <p id="legal"><strong>LEGAL INFORMATION:</strong><br><br>
+      PURPOSE OF RESEARCH STUDY<br>
+
+The goal of the project is to measure what makes particular aspects of language easier or harder to learn and understand.<br><br>
+
+PROCEDURES<br>
+
+You will be asked to read or listen to language, and answer questions about what you’ve read or heard. The sentences may be in English or in a made-up language that you will learn during the experiment. The experiment involves a single session that will take up to an hour; there will be up to five sessions, but most participants will only participate in a single session.<br><br>
+
+RISKS/DISCOMFORTS<br>
+
+The risks associated with participation in this study are no greater than those encountered in daily life.<br><br>
+BENEFITS<br>
+
+There are no direct benefits to you from participating in this study. This study may benefit society if the results lead to a better understanding of what makes certain aspects of language easier or harder to learn and understand.<br><br>
+
+VOLUNTARY PARTICIPATION AND RIGHT TO WITHDRAW<br>
+
+Your participation in this study is entirely voluntary: You choose whether to participate. If you decide not to participate, there are no penalties, and you will not lose any benefits to which you would otherwise be entitled.<br>
+
+If you choose to participate in the study, you can stop your participation at any time, without any penalty or loss of benefits.<br><br>
+
+CONFIDENTIALITY<br>
+Any study records that identify you will be kept confidential to the extent possible by law. The records from your participation may be reviewed by people responsible for making sure that research is done properly. Otherwise, records that identify you will be available only to people working on the study, unless you give permission for other people to see the records.<br>
+
+Any study records that include your name will be kept in a password-protected database. On all records of test results we will use a code number rather than your name.<br><br>
+
+COMPENSATION<br>
+
+You will receive compensation in proportion to the length of the session.<br><br>
+
+IF YOU HAVE QUESTIONS OR CONCERNS<br>
+
+You can ask questions about this research study now or at any time during the study, by talking to the researcher(s) working with you or by emailing Dr. Tal Linzen at linzen@nyu.edu.<br>
+
+If you have questions about your rights as a research participant or feel that you have not been treated fairly, please contact the NYU Institutional Review Board at ask.humansubjects@nyu.edu or 212.998.4808.
+
+    </p>
+  </div>
+
+
+  <div class="slide" id="instructions">
+
+		<h3>Instructions</h3>
+    <p>On the following screens, you will see two options: one will be the next word in the text, and one will not. Select the word that continues the text by pressing 'e' (left-hand) for the word on the left or pressing 'i' (right-hand) for the word on the right.</p>
+
+    <p>Please place your left index finger on the 'e' key and your right index finger on the 'i' key, and click 'Continue' to start the experiment.</p>
+
+    <input type="button" class="button" value="Continue" onclick="exp.go();">
+
+  </div>
+
+  <div class="slide" id="trial">
+
+    <div id="maze-wrapper">
+		<p>Select the word that continues the text by pressing the 'e' or the 'i' key.</p>
+
+    <p class="error">You chose the wrong word. Please try again!</p>
+		<div class="maze-container">
+      <div class="lword" id="lword">###</div>
+      <div class="rword" id="rword">###</div>
+    </div>
+    <div class="maze-keys-container">
+      <div class="lkey">e</div><div class="rkey">i</div>
+    </div>
+  </div>
+    <div id="intermission">
+      <p>Press any button to continue to the next text.</p>
+    </div>
+
+
+  </div>
+
+  <div class="slide" id="subj_info">
+    <div class="long_form">
+      <div class="subj_info_title">Additional information</div>
+
+      <p class="info">Answering these questions is optional, but will help us understand your answers.</p>
+      <p>Did you read the instructions and do you think you did the experiment correctly?</p>
+      <label><input type="radio"  name="assess" value="No"/>No</label>
+      <label><input type="radio"  name="assess" value="Yes"/>Yes</label>
+      <label><input type="radio"  name="assess" value="Confused"/>I was confused</label>
+
+      <p>Were there any problems or bugs in the experiment?</p>
+      <textarea id="problems" rows="2" cols="50"></textarea>
+
+      <p>What do you think is a fair price for the work you did?</p>
+      <input type="text" id="fairprice" />
+
+
+      <p>Native Language: <input type="text" id="language"/></p>
+      <label>(the language(s) spoken at home when you were a child)</label>
+
+      <p>Other Languages: <input type="text" id="other-language"/></p>
+      <label>(other languages that you learned at some point in your life)</label>
+
+      <p>Age: <input type="text" id="age"/></p>
+
+      <p>Gender: <select id="gender">
+      <option value="">
+      </option>
+      <option value="Male">
+        male
+      </option>
+      <option value="Female">
+        female
+      </option>
+      <option value="Other">
+        other
+      </option>
+    </select>
+  </p>
+
+  <p>
+          Level of education: <select id="education">
+            <option value="-1">
+            </option>
+            <option value="0">
+              Some high school
+            </option>
+            <option value="1">
+              Graduated high school
+            </option>
+            <option value="2">
+              Some college
+            </option>
+            <option value="3">
+              Graduated college
+            </option>
+            <option value="4">
+              Hold a higher degree
+            </option>
+          </select>
+        </p>
+
+      <p>Did you enjoy the experiment?</p>
+      <select id="enjoyment">
+        <label><option value="-1"></option></label>
+        <label><option value="0">Worse than the average experiment</option></label>
+        <label><option value="1" >An average experiment</option></label>
+        <label><option value="2">Better than average experiment</option></label>
+      </select>
+
+      <p>We would be interested in any comments you have about this experiment. Please type them here:</p>
+      <textarea id="comments" rows="3" cols="50"></textarea>
+      <br/>
+
+
+      <button onclick="_s.submit()">Submit</button>
+    </div>
+  </div>
+
+  <div id="thanks" class="slide js" >
+    <p  class="big" id="thanks-text">Thanks for your time!</p>
+  </div>
+
+  <div class="progress">
+    <span>Progress:</span>
+    <div class="bar-wrapper">
+      <div class="bar" width="0%">
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

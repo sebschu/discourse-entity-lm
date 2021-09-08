@@ -1,0 +1,91 @@
+.slider {
+  /* default is width 400 and margin 10 */
+	width: 400;
+	margin: 10px;
+}
+
+input.button {
+  padding: 10px 40px 10px 40px;
+  margin: 5px;
+  border: 1px solid black;
+  font-size: 14pt;
+  font-weight: bold;
+  background-color: #eee;
+  cursor: pointer;
+}
+
+
+#player {
+  margin: 15px 0 60px 0;
+}
+
+p.train-instructions {
+  margin: 50px 0 0 0;
+}
+
+.slide {
+  height: 700px;
+}
+
+#i0 {
+	height: 1000px;
+}
+
+.test-stimulus {
+  font-size: 2em;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.question {
+  font-size: 1em;
+  font-weight: bold;
+  font-style: italic;
+}
+
+#comprehension-question {
+  margin-top: 65px;
+}
+
+.error {
+	color: red;
+}
+
+.maze-container {
+
+  width: 544px;
+	font-size: 32px;
+	margin: 150px auto;
+}
+
+.maze-container .lword, .maze-container .rword {
+  width: 192px;
+  padding: 10px;
+  float: left;
+}
+
+.maze-container .lword {
+  margin: 0 100px 0 0;
+}
+
+.maze-keys-container {
+  width: 544px;
+	margin: 10px auto;
+	font-size: 32px;
+}
+
+.maze-keys-container .lkey, .maze-keys-container .rkey {
+   width: 40px;
+   padding: 10px;
+   float: left;
+   border: 1px solid #666;
+   margin: 0 75px 0 100px;
+}
+
+.maze-keys-container .lkey {
+  margin: 0 150px 0 75px;
+}
+
+#intermission {
+	margin: 200px auto;
+}
