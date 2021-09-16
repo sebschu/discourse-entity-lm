@@ -9,7 +9,7 @@ output_fname = config["output"]
 model_id = config["model"]
 
 from transformers import GPT2LMHeadModel, GPT2TokenizerFast
-device = 'cpu'
+device = 'cpu' if len(sys.argv) < 3 else sys.argv[2]
 print("Loading model...")
 model = GPT2LMHeadModel.from_pretrained(model_id).to(device)
 print("Loaded model...")
