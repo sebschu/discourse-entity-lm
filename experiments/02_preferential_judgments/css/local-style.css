@@ -1,0 +1,56 @@
+.slider {
+  /* default is width 400 and margin 10 */
+	width: 400;
+	margin: 10px;
+}
+
+input.button {
+  padding: 10px 40px 10px 40px;
+  margin: 5px;
+  border: 1px solid black;
+  font-size: 14pt;
+  font-weight: bold;
+  background-color: #eee;
+  cursor: pointer;
+}
+
+
+#player {
+  margin: 15px 0 60px 0;
+}
+
+p.train-instructions {
+  margin: 50px 0 0 0;
+}
+
+.slide {
+  height: 700px;
+}
+
+#i0 {
+	height: 1000px;
+}
+
+#prompt-wrapper {
+  font-size: 150%;
+  margin: 40px 5px;
+}
+
+.trial-instruction {
+  font-style: italic;
+  margin: 30px 5px 5px;
+}
+
+#continuation-1, #continuation-2 {
+  width: 95%;
+  padding: 10px;
+  border: 1px solid #666;
+  margin: 10px 0;
+  font-size: 120%;
+}
+
+
+#continuation-1:hover, #continuation-2:hover {
+  cursor: pointer;
+  background: #eee;
+}
