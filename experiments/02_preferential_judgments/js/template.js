@@ -49,27 +49,25 @@ function make_slides(f) {
         $("#continuation-2").text(stim.exp_continuation);
         $("#continuation-1").data("val", "unexp");
         $("#continuation-2").data("val", "exp");
-        
       } else {
         $("#continuation-1").text(stim.exp_continuation);
         $("#continuation-2").text(stim.unexp_continuation);
         $("#continuation-1").data("val", "exp");
         $("#continuation-2").data("val", "unexp");
-        
       }
       
       $("#continuation-1, #continuation-2").unbind("click");
       
       var t = this;
       $("#continuation-1, #continuation-2").click(function() {
-        t.log_responses($(this).data("val"));
+        t.log_responses($(this).data("val"), $(this).text());
       });
       
 
      
     },
 
-    log_responses : function(response) {
+    log_responses : function(response, cont) {
       
       exp.data_trials.push({
         "id": this.stim.id,
@@ -78,6 +76,7 @@ function make_slides(f) {
         "unexp_continuation": this.stim.unexp_continuation,
         "response": response,
         "type": this.stim.type || "filler",
+        "chosen_continuation": cont,
         "order": this.stim.order
       });
       _stream.apply(this);
