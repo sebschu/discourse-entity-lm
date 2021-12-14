@@ -1,0 +1,4 @@
+{
+  "input": "./stimuli/2nouns_full_sentence_hand_written_stimuli.jsonl",
+  "output": "./results/2nouns_full_sentence_hand_written_stimuli.gpt3.csv"
+}

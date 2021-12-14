@@ -1,0 +1,6 @@
+{
+  "input": "./stimuli/full_sentence_hand_written_stimuli.jsonl",
+  "output": "./results/full_sentence_hand_written_stimuli.gpt2-xl.csv",
+  "model": "gpt2-xl",
+  "compute_ll": true
+}

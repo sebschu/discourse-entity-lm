@@ -1,0 +1,4 @@
+{
+  "input": "./stimuli/they_hand_written_stimuli.jsonl",
+  "output": "./results/they_hand_written_stimuli.gpt3.csv"
+}

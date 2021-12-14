@@ -1,0 +1,6 @@
+{
+  "input": "./stimuli/2nouns_hand_written_stimuli.jsonl",
+  "output": "./results/2nouns_hand_written_stimuli.gpt2.csv",
+  "model": "gpt2",
+  "compute_ll": true
+}

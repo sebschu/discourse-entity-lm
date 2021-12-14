@@ -1,0 +1,5 @@
+{
+  "input": "./stimuli/hand_written_stimuli.jsonl",
+  "output": "./results/hand_written_stimuli.gpt2-medium.generation.csv",
+  "model": "gpt2-medium"
+}
