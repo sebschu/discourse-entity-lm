@@ -14,27 +14,26 @@ def main():
   with open(args.input_file, "r") as res_f:
       reader = csv.DictReader(res_f)
       for line in reader:
-          tokens = [t.replace(" ", "##") for t in line["tokens"].split("|")]
-          log_probs = line["log_probs"].split("|")
+          tokens = [t.replace(" ", "##") for t in line["tokens"].split("|||")]
+          log_probs = line["log_probs"].split("|||")
           critical_token_idx = -1
           if "pronoun" not in line: # 2 noun results
-            critical_token_idx = len(log_probs) - 2
-          elif line["pronoun"] == "it":
-              for i, token in enumerate(tokens):
-                  if (token == "##it" or token == "##It" or token == "##they" or token == "##They") and i > 0 and ("and" in tokens[i-1] or tokens[i-1] == "."):
-                      critical_token_idx = i
-                      break
-
+            for i, token in enumerate(tokens):
+              if token == ".":
+                critical_token_idx = i
+                break
           else:
-              for i, token in enumerate(tokens):
-                  if (token == "##she" or token == "##She" or token == "##he" or token == "##He") and i > 0 and ("and" in tokens[i-1] or tokens[i-1] == "."):
-                      critical_token_idx = i
-                      break
+            for i, token in enumerate(tokens):
+                if (token == "##it" or token == "##It" or token == "##they" or token == "##They") and i > 0 and ("and" in tokens[i-1] or tokens[i-1] == "."):
+                    critical_token_idx = i
+                    break
+
+          
 
           if critical_token_idx < 0:
               print("ERROR: critical token idx is 0!!!")
               print(line)
-          line["pronoun_log_prob"] = log_probs[critical_token_idx]
+          line["continuation_log_prob"] = sum([float(x) for x in log_probs[critical_token_idx:-1]])
           line["critical_token_idx"] = critical_token_idx
           examples.append(line)
 
