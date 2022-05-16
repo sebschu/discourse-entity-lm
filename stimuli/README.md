@@ -16,5 +16,19 @@ Structure of items:
   "type": "<ITEM TYPE>"
 }
 
+```
 
+`2_noun_full_sentence_hand_written_stimuli.jsonl`:
+```json
+{
+{
+  "id": "<ITEM IDENTFIER>",
+  "exp_sentence": "<SENTENCE AND EXPECTED CONTINUATION>", 
+  "unexp_sentence": "<SENTENCE AND UNEXPECTED CONTINUATION>",
+  "prompt": "<SENTENCE>", 
+  "exp_continuation": "<EXPECTED CONTINUATION>", 
+  "unexp_continuation": "<UNEXPECTED CONTINUATION>", 
+  "type": "<ITEM TYPE>", 
+  "order": "<ORDER OF NOUNS (1 or 2)>"
+}
 ```
