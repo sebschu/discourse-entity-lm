@@ -1,0 +1,5 @@
+"","pair","ci_low","ci_high","exp_prop"
+"1","affirmative-modal",0.75,0.875,0.8125
+"2","affirmative-negated",0.9375,1,1
+"3","know-doubt",0.8125,0.9375,0.875
+"4","managed-failed",0.9375,1,1
