@@ -10,10 +10,10 @@ Structure of items:
 ```json
 
 {
-  "id": <ITEM identifier>
-  "i_sentence": <SENTENCE AND REFERENTIAL CONTINUATION>, 
+  "id": "<ITEM IDENTFIER>",
+  "i_sentence": "<SENTENCE AND REFERENTIAL CONTINUATION>", 
   "s_sentence": "<SENTENCE AND NON-EFERENTIAL CONTINUATION>", 
-  "type": "<ITEM TYE"
+  "type": "<ITEM TYPE>"
 }
 
 
